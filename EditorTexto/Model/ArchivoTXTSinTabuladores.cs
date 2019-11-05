@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EditorTexto.Model
 {
-    class ArchivoTXT : Archivo
+    class ArchivoTXTSinTabuladores : Archivo
     {
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)

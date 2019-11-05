@@ -13,7 +13,7 @@ namespace EditorTexto.Model
         {
             throw new NotImplementedException();
         }
-        //Despues de abri
+        //Despues de abrir
         public override Texto convertirATexto(string textoArchivo)
         {
             throw new NotImplementedException();

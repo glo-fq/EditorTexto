@@ -51,7 +51,8 @@
     <Compile Include="Model\ArchivoCSV.cs" />
     <Compile Include="Model\ArchivoJSON.cs" />
     <Compile Include="Model\ArchivoPDF.cs" />
-    <Compile Include="Model\ArchivoTXT.cs" />
+    <Compile Include="Model\ArchivoTXTConTabuladores.cs" />
+    <Compile Include="Model\ArchivoTXTSinTabuladores.cs" />
     <Compile Include="Model\ArchivoXML.cs" />
     <Compile Include="Model\Factory.cs" />
     <Compile Include="Model\IFactory.cs" />
