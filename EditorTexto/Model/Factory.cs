@@ -17,8 +17,10 @@ namespace EditorTexto.Model
                     return new ArchivoJSON();
                 case "PDF":
                     return new ArchivoPDF();
-                case "TXT":
-                    return new ArchivoTXT();
+                case "TXTC":
+                    return new ArchivoTXTConTabuladores();
+                case "TXTS":
+                    return new ArchivoTXTSinTabuladores();
                 case "XML":
                     return new ArchivoXML();
                 default:
