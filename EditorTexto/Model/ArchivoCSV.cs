@@ -8,11 +8,12 @@ namespace EditorTexto.Model
 {
     class ArchivoCSV : Archivo
     {
+        //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
             throw new NotImplementedException();
         }
-
+        //Despues de abri
         public override Texto convertirATexto(string textoArchivo)
         {
             throw new NotImplementedException();
