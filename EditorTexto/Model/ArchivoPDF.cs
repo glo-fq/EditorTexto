@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace EditorTexto.Model
 {
-    class ArchivoPDF
+    class ArchivoPDF : Archivo
     {
+        public override string convertirAFormatoDeseado(Texto texto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Texto convertirATexto(string textoArchivo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

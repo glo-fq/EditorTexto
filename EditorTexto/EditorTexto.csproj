@@ -46,6 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Class1.cs" />
+    <Compile Include="Model\Archivo.cs" />
+    <Compile Include="Model\ArchivoCSV.cs" />
+    <Compile Include="Model\ArchivoJSON.cs" />
+    <Compile Include="Model\ArchivoPDF.cs" />
+    <Compile Include="Model\ArchivoTXT.cs" />
+    <Compile Include="Model\ArchivoXML.cs" />
+    <Compile Include="Model\Factory.cs" />
+    <Compile Include="Model\IFactory.cs" />
+    <Compile Include="Model\Texto.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,8 +89,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
