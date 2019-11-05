@@ -8,5 +8,6 @@ namespace EditorTexto.Model
 {
     interface IFactory
     {
+        Archivo CrearArchivo();
     }
 }
