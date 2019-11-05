@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace EditorTexto.Model
 {
-    class ArchivoJSON : Archivo
+    class ArchivoTXTSinTabuladores : Archivo
     {
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
             throw new NotImplementedException();
         }
-        //Despues de abrir
+        //Despues de abri
         public override Texto convertirATexto(string textoArchivo)
         {
             throw new NotImplementedException();

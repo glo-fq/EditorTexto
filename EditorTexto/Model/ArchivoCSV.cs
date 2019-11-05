@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace EditorTexto.Model
 {
-    class ArchivoCSV
+    class ArchivoCSV : Archivo
     {
+        //Antes de guardar
+        public override string convertirAFormatoDeseado(Texto texto)
+        {
+            throw new NotImplementedException();
+        }
+        //Despues de abrir
+        public override Texto convertirATexto(string textoArchivo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
