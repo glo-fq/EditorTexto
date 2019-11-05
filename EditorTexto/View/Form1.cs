@@ -16,5 +16,67 @@ namespace EditorTexto
         {
             InitializeComponent();
         }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void otroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+        }
+
+        private void rojoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Red;
+        }
+
+        private void azulToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Blue;
+        }
+
+        private void verdeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Green;
+        }
+
+        private void rosadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Pink;
+        }
+
+        private void anaranjadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Orange;
+        }
+
+        private void moradoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Purple;
+        }
+
+        private void amarilloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Yellow;
+        }
+
+        private void grisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionColor = Color.Gray;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
