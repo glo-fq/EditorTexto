@@ -53,8 +53,8 @@ namespace EditorTexto.Model
                 
 
             }
-
-            throw new NotImplementedException();
+            return nuevoTxt;
+           // throw new NotImplementedException();
         }
     }
 }

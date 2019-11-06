@@ -41,7 +41,7 @@ namespace EditorTexto
                 else if (index == 2) {
                     extension = extension + "c";
                 }
-                       
+                
                 Archivo archivo = factory.CrearArchivo(extension);
                 String text = archivo.abriArchivo(Open.FileName);
                 this.texto.setText(archivo.convertirATexto(text));
@@ -163,7 +163,7 @@ namespace EditorTexto
                 else if (index == 2) {
                     extension = extension + "c";
                 }
-                MessageBox.Show(extension.ToString()); 
+               
                 Archivo archivo = factory.CrearArchivo(extension);
                 String text = archivo.convertirAFormatoDeseado(this.texto);
                 archivo.setTexto(text);
