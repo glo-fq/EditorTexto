@@ -11,7 +11,16 @@ namespace EditorTexto.Model
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
+            String json = "";
 
+            foreach (Posicion p in texto.getEstructura())
+            {
+                json = json + p.getColor().ToString() + "-" + p.getIniPos().ToString() + "-" + p.getFinPos().ToString() + ".\n";
+            }
+            json = json + "??¿¿\n";
+            foreach (char c in texto.getTexto()){
+
+            }
             throw new NotImplementedException();
         }
         //Despues de abrir

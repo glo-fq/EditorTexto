@@ -11,7 +11,7 @@ namespace EditorTexto.Model
     {
         String texto="";
         public String abriArchivo(String ruta) {
-            
+
             using (StreamReader file = new StreamReader(ruta)) {
                 texto = file.ReadToEnd();
                 file.Close();

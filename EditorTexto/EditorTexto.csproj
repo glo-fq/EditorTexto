@@ -56,6 +56,7 @@
     <Compile Include="Model\ArchivoXML.cs" />
     <Compile Include="Model\Factory.cs" />
     <Compile Include="Model\IFactory.cs" />
+    <Compile Include="Model\Posicion.cs" />
     <Compile Include="Model\Texto.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
