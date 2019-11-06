@@ -11,12 +11,25 @@ namespace EditorTexto.Model
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
-            throw new NotImplementedException();
+            return cambiarAComas(texto.getText());
         }
+
         //Despues de abrir
         public override string convertirATexto(string textoArchivo)
         {
-            throw new NotImplementedException();
+            return cambiarAEspacios(textoArchivo);
+        }
+
+        private string cambiarAComas(string texto)
+        {
+            string nuevoTexto = texto.Replace(' ', ',');
+            return nuevoTexto;
+        }
+
+        private string cambiarAEspacios(string texto)
+        {
+            string nuevoTexto = texto.Replace(',', ' ');
+            return nuevoTexto;
         }
     }
 }

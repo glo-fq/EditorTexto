@@ -139,6 +139,8 @@ namespace EditorTexto
         }
 
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e) {
+
+
         }
         private void GuardarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
