@@ -27,7 +27,6 @@ namespace EditorTexto.Model
                 }               
             }
             return nuevoTxt;
-            //throw new NotImplementedException();
         }
         //Despues de abrir
         public override string convertirATexto(string textoArchivo)
@@ -49,12 +48,9 @@ namespace EditorTexto.Model
                         cont++;
                     }
                 }
-
-                
-
             }
             return nuevoTxt;
-           // throw new NotImplementedException();
+
         }
     }
 }

@@ -19,9 +19,7 @@ namespace EditorTexto.Model
             return texto;
         }
         public void guardarComo(String ruta) {
-            Console.WriteLine("GUARDAR COMO");
-            using (StreamWriter file = File.AppendText(ruta)) {
-                Console.WriteLine(ruta);
+            using (StreamWriter file = File.CreateText(ruta)) {
                 file.WriteLine(texto);
                 file.Close();
             }

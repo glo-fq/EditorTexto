@@ -16,6 +16,9 @@ namespace EditorTexto
     {
         IFactory factory;
         Texto texto;
+        Archivo archivo=null;
+        String ruta;
+
         public Form1()
         {
             InitializeComponent();
@@ -41,10 +44,10 @@ namespace EditorTexto
                 else if (index == 2) {
                     extension = extension + "c";
                 }
-                
-                Archivo archivo = factory.CrearArchivo(extension);
-                String text = archivo.abriArchivo(Open.FileName);
-                this.texto.setText(archivo.convertirATexto(text));
+                this.ruta = Open.FileName;
+                this.archivo = factory.CrearArchivo(extension);
+                String text = this.archivo.abriArchivo(Open.FileName);
+                this.texto.setText(this.archivo.convertirATexto(text));
                 richTextBox1.Text= this.texto.getText();
             }
             catch (Exception) {
@@ -139,7 +142,15 @@ namespace EditorTexto
         }
 
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            if (this.archivo==null)
+            {
+                GuardarComoToolStripMenuItem_Click(sender, e);
+            }
+            else {
+                String text = (String)archivo.convertirAFormatoDeseado(this.texto);
+                archivo.setTexto(text);
+                archivo.guardarComo(ruta);
+            }
 
         }
         private void GuardarComoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -165,9 +176,9 @@ namespace EditorTexto
                 else if (index == 2) {
                     extension = extension + "c";
                 }
-               
-                Archivo archivo = factory.CrearArchivo(extension);
-                String text = archivo.convertirAFormatoDeseado(this.texto);
+                this.ruta = Save.FileName;
+                archivo = factory.CrearArchivo(extension);
+                String text = (String)archivo.convertirAFormatoDeseado(this.texto);
                 archivo.setTexto(text);
                 archivo.guardarComo(Save.FileName);
               
