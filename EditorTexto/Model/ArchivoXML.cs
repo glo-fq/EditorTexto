@@ -82,7 +82,7 @@ namespace EditorTexto.Model
         }
 
         //Despues de abrir
-        public override string convertirATexto(string textoArchivo)
+        public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
             var pieces = textoArchivo.Split(new[] { "</colores>" }, StringSplitOptions.None);
 

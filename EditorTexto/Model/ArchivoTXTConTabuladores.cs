@@ -29,7 +29,7 @@ namespace EditorTexto.Model
             return nuevoTxt;
         }
         //Despues de abrir
-        public override string convertirATexto(string textoArchivo)
+        public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
             String nuevoTxt = "";
             int cont = 1;
@@ -49,7 +49,9 @@ namespace EditorTexto.Model
                     }
                 }
             }
-            return nuevoTxt;
+            texto.setText(nuevoTxt);
+
+            return texto;
 
         }
     }
