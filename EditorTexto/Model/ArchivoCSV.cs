@@ -15,9 +15,10 @@ namespace EditorTexto.Model
         }
 
         //Despues de abrir
-        public override string convertirATexto(string textoArchivo)
+        public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
-            return cambiarAEspacios(textoArchivo);
+            texto.setText(cambiarAEspacios(textoArchivo));
+            return texto;
         }
 
         private string cambiarAComas(string texto)

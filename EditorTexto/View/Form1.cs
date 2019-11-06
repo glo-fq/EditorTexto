@@ -47,7 +47,7 @@ namespace EditorTexto
                 this.ruta = Open.FileName;
                 this.archivo = factory.CrearArchivo(extension);
                 String text = this.archivo.abriArchivo(Open.FileName);
-                this.texto.setText(this.archivo.convertirATexto(text));
+                this.texto= this.archivo.convertirATexto(text, texto);
                 richTextBox1.Text= this.texto.getText();
             }
             catch (Exception) {

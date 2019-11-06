@@ -16,9 +16,10 @@ namespace EditorTexto.Model
             //throw new NotImplementedException();
         }
         //Despues de abri
-        public override string convertirATexto(string textoArchivo)
+        public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
-            return textoArchivo;
+            texto.setText(textoArchivo);
+            return texto;
             
             //throw new NotImplementedException();
         }

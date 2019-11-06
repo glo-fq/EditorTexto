@@ -15,7 +15,7 @@ namespace EditorTexto.Model
             throw new NotImplementedException();
         }
         //Despues de abrir
-        public override string convertirATexto(string textoArchivo)
+        public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
             
             throw new NotImplementedException();
