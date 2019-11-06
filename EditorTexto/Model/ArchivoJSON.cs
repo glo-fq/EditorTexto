@@ -21,7 +21,7 @@ namespace EditorTexto.Model
             JArray p = new JArray(); 
             int cont = 0;
             foreach (char c in textoAConvertir) {
-                if ((c == '\n') ||(c=='\0')) {
+                if ((c == '\n')) {
                     parrafos.Add(p);
                     p = new JArray();
 
