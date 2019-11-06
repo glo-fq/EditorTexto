@@ -165,7 +165,7 @@ namespace EditorTexto
                 }
                
                 Archivo archivo = factory.CrearArchivo(extension);
-                String text = archivo.convertirAFormatoDeseado(this.texto);
+                String text = (String)archivo.convertirAFormatoDeseado(this.texto);
                 archivo.setTexto(text);
                 archivo.guardarComo(Save.FileName);
               
