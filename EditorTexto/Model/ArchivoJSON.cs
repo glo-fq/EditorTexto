@@ -11,10 +11,12 @@ namespace EditorTexto.Model
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
+
+            
             throw new NotImplementedException();
         }
         //Despues de abrir
-        public override Texto convertirATexto(string textoArchivo)
+        public override string convertirATexto(string textoArchivo)
         {
             throw new NotImplementedException();
         }

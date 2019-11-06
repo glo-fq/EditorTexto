@@ -11,11 +11,49 @@ namespace EditorTexto.Model
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
-            throw new NotImplementedException();
+            String txt = texto.getText();
+            String nuevoTxt = "";
+            int cont = 1;
+            foreach (char c in txt) {
+                nuevoTxt = nuevoTxt + c;
+                if (cont == 10)
+                {
+                    nuevoTxt = nuevoTxt + "\t\t\t";
+                    cont = 1;
+                }
+                else
+                {
+                    cont++;
+                }               
+            }
+            return nuevoTxt;
+            //throw new NotImplementedException();
         }
         //Despues de abrir
-        public override Texto convertirATexto(string textoArchivo)
+        public override string convertirATexto(string textoArchivo)
         {
+            String nuevoTxt = "";
+            int cont = 1;
+            foreach (char c in textoArchivo) {
+                if (cont < 11 && cont < 13)
+                {
+                    nuevoTxt = nuevoTxt + c;
+                    cont++;
+                }
+                else {
+                    if (cont == 13)
+                    {
+                        cont = 1;
+                    }
+                    else {
+                        cont++;
+                    }
+                }
+
+                
+
+            }
+
             throw new NotImplementedException();
         }
     }

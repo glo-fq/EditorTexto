@@ -1,8 +1,10 @@
-﻿using System;
+﻿using EditorTexto.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ namespace EditorTexto
 {
     public partial class Form1 : Form
     {
+        IFactory factory;
+        Texto texto;
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +23,32 @@ namespace EditorTexto
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+            
+            OpenFileDialog Open = new OpenFileDialog();
+            //se especifica que tipos de archivos se podran abrir y se verifica si existe
+            Open.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt|XML [*.xml*]| *.xml| CSV [*.csv*] | *.csv| JSON [*.json*] | *.json";
+            Open.CheckFileExists = true;
+            Open.Title = "Abrir Archivo";
+            Open.ShowDialog(this);
+            try
+            {
+                Open.OpenFile();
+                int index = Open.FilterIndex;
+                String extension = Path.GetExtension(Open.FileName);
+                if (index == 1) {
+                    extension = extension+"s";
+                }
+                else if (index == 2) {
+                    extension = extension + "c";
+                }
+                       
+                Archivo archivo = factory.CrearArchivo(extension);
+                String text = archivo.abriArchivo(Open.FileName);
+                this.texto.setText(archivo.convertirATexto(text));
+                richTextBox1.Text= this.texto.getText();
+            }
+            catch (Exception) {
+            }
         }
 
         private void otroToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +133,45 @@ namespace EditorTexto
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            factory = new Factory();
+            texto = new Texto();
+            texto.setRich(this.richTextBox1);
+        }
 
+        private void GuardarToolStripMenuItem_Click(object sender, EventArgs e) {
+        }
+        private void GuardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //se crea un objeto de tipo savefiledialog que nos servira para guardar el archivo
+            SaveFileDialog Save = new SaveFileDialog();
+           // System.IO.StreamWriter myStreamWriter = null;
+            //al igual que para abrir el tipo de documentos aqui se especifica en que extenciones se puede guardar el archivo
+            Save.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt|XML [*.xml*]| *.xml| CSV [*.csv*] | *.csv| JSON [*.json*] | *.json| PDF [*.pdf*] | *.pdf";
+            Save.CheckPathExists = true;
+            Save.Title = "Guardar como";
+            Save.ShowDialog(this);
+           
+            try
+            {
+                int index = Save.FilterIndex;
+               
+                String extension = Path.GetExtension(Save.FileName);
+                if (index == 1)
+                {
+                    extension = extension + "s";
+                }
+                else if (index == 2) {
+                    extension = extension + "c";
+                }
+                MessageBox.Show(extension.ToString()); 
+                Archivo archivo = factory.CrearArchivo(extension);
+                String text = archivo.convertirAFormatoDeseado(this.texto);
+                archivo.setTexto(text);
+                archivo.guardarComo(Save.FileName);
+              
+
+            }
+            catch (Exception) { }
         }
     }
 }

@@ -11,20 +11,22 @@ namespace EditorTexto.Model
         public Archivo CrearArchivo(string formato)
         {
             switch (formato) {
-                case "CSV":
+                case ".csv":
                     return new ArchivoCSV();
-                case "JSON":
+                case ".json":
                     return new ArchivoJSON();
-                case "PDF":
+                case ".pdf":
                     return new ArchivoPDF();
-                case "TXTC":
+                case ".txtc":
                     return new ArchivoTXTConTabuladores();
-                case "TXTS":
+                case ".txts":
                     return new ArchivoTXTSinTabuladores();
-                case "XML":
+                case ".xml":
                     return new ArchivoXML();
                 default:
-                    throw new NotImplementedException();
+                    Console.WriteLine("Formato no valido");
+                    return null;
+                    //throw new NotImplementedException();
             }
         }
     }
