@@ -24,7 +24,9 @@ namespace EditorTexto.Model
                 case ".xml":
                     return new ArchivoXML();
                 default:
-                    throw new NotImplementedException();
+                    Console.WriteLine("Formato no valido");
+                    return null;
+                    //throw new NotImplementedException();
             }
         }
     }

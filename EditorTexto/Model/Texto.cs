@@ -4,24 +4,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EditorTexto.Model
 {
     class Texto
     {
-        String texto;
-        List<Posicion> estructura;
-        public String getTexto() {
-            return this.texto;
+        RichTextBox rich;
+        public RichTextBox getRich() {
+            return this.rich;
         }
-        public void setTexto(String ptexto) {
-            texto = ptexto;
+        public void setRich(RichTextBox ptexto) {
+            rich = ptexto;
         }
-        public void setEstructura(List<Posicion> es) {
-            this.estructura = es;
+        public String getText() {
+            return rich.Text;
         }
-        public List<Posicion> getEstructura() {
-            return this.estructura;
+        public void setText(String text) {
+            this.rich.Text = text;
         }
+
     }
 }

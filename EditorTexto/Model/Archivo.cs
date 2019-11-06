@@ -19,7 +19,9 @@ namespace EditorTexto.Model
             return texto;
         }
         public void guardarComo(String ruta) {
+            Console.WriteLine("GUARDAR COMO");
             using (StreamWriter file = File.AppendText(ruta)) {
+                Console.WriteLine(ruta);
                 file.WriteLine(texto);
                 file.Close();
             }
@@ -31,7 +33,7 @@ namespace EditorTexto.Model
             this.texto = texto;
         }
         //La idea es que este reciba el texto de abri (con todo lo que contiene) y lo cambie al que va a mostrar en pantalla
-        public abstract Texto convertirATexto(String textoArchivo);
+        public abstract string convertirATexto(String textoArchivo);
         //La idea es que este reciba el texto de la interfaz y lo convierta al archivo que quiera (siempre en formato string) y luego llame a guardar texto y lo guarde en ese formato
         public abstract String convertirAFormatoDeseado(Texto texto);
     }

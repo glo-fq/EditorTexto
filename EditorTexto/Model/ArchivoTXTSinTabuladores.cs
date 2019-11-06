@@ -11,12 +11,16 @@ namespace EditorTexto.Model
         //Antes de guardar
         public override string convertirAFormatoDeseado(Texto texto)
         {
-            throw new NotImplementedException();
+            String text = texto.getRich().Text;
+            return text;
+            //throw new NotImplementedException();
         }
         //Despues de abri
-        public override Texto convertirATexto(string textoArchivo)
+        public override string convertirATexto(string textoArchivo)
         {
-            throw new NotImplementedException();
+            return textoArchivo;
+            
+            //throw new NotImplementedException();
         }
     }
 }

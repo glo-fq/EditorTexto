@@ -23,9 +23,10 @@ namespace EditorTexto
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog Open = new OpenFileDialog();
             //se especifica que tipos de archivos se podran abrir y se verifica si existe
-            Open.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt |XML [*.xml*]| *.xml | CSV [*.csv*] | *.csv | JSON [*.json*] | *.json";
+            Open.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt|XML [*.xml*]| *.xml| CSV [*.csv*] | *.csv| JSON [*.json*] | *.json";
             Open.CheckFileExists = true;
             Open.Title = "Abrir Archivo";
             Open.ShowDialog(this);
@@ -43,8 +44,8 @@ namespace EditorTexto
                        
                 Archivo archivo = factory.CrearArchivo(extension);
                 String text = archivo.abriArchivo(Open.FileName);
-                this.texto = archivo.convertirATexto(text);
-                richTextBox1.Text= this.texto.getTexto();
+                this.texto.setText(archivo.convertirATexto(text));
+                richTextBox1.Text= this.texto.getText();
             }
             catch (Exception) {
             }
@@ -133,6 +134,8 @@ namespace EditorTexto
         private void Form1_Load(object sender, EventArgs e)
         {
             factory = new Factory();
+            texto = new Texto();
+            texto.setRich(this.richTextBox1);
         }
 
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -143,7 +146,7 @@ namespace EditorTexto
             SaveFileDialog Save = new SaveFileDialog();
            // System.IO.StreamWriter myStreamWriter = null;
             //al igual que para abrir el tipo de documentos aqui se especifica en que extenciones se puede guardar el archivo
-            Save.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt |XML [*.xml*]| *.xml | CSV [*.csv*] | *.csv | JSON [*.json*] | *.json | PDF [*.pdf*] | *.pdf";
+            Save.Filter = "Text Simple [*.txt*]|*.txt| Text Tabuladores [*.txt*]|*.txt|XML [*.xml*]| *.xml| CSV [*.csv*] | *.csv| JSON [*.json*] | *.json| PDF [*.pdf*] | *.pdf";
             Save.CheckPathExists = true;
             Save.Title = "Guardar como";
             Save.ShowDialog(this);
@@ -160,10 +163,11 @@ namespace EditorTexto
                 else if (index == 2) {
                     extension = extension + "c";
                 }
-            //  MessageBox.Show(extension.ToString()); 
+                MessageBox.Show(extension.ToString()); 
                 Archivo archivo = factory.CrearArchivo(extension);
                 String text = archivo.convertirAFormatoDeseado(this.texto);
-                archivo.guardarComo(text);
+                archivo.setTexto(text);
+                archivo.guardarComo(Save.FileName);
               
 
             }
