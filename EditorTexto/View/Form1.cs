@@ -116,21 +116,21 @@ namespace EditorTexto
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            caretaker.add(texto.saveStateToMemento());
+      /*      caretaker.add(texto.saveStateToMemento());
             contador = caretaker.size() - 1;
             if (contador < caretaker.size() && contador>=0) {
                 texto.getStateFromMemento(caretaker.get(contador-1));
                 contador = contador - 1;
-            }   
+            }   ]*/
            // richTextBox1.Undo();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (contador < caretaker.size() - 1) {
+       /*     if (contador < caretaker.size() - 1) {
                 texto.getStateFromMemento(caretaker.get(contador + 1));
                 contador = contador + 1;
-            }
+            }*/
             //richTextBox1.Redo();
         }
 
@@ -146,7 +146,7 @@ namespace EditorTexto
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            caretaker = new Caretaker();
+            //caretaker = new Caretaker();
             factory = new Factory();
             texto = new Texto();
             texto.setRich(this.richTextBox1);
