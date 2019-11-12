@@ -16,7 +16,7 @@ namespace EditorTexto.Model
         {
             String textoAConvertir = texto.getText();
             textoAConvertir = textoAConvertir + "\n";
-            dynamic product = new JObject();
+           // dynamic product = new JObject();
             JArray parrafos = new JArray();
             JArray p = new JArray(); 
             int cont = 0;
@@ -35,13 +35,16 @@ namespace EditorTexto.Model
                 cont++;
 
             }
-            product.Parrafos = parrafos;
-            return product.ToString();
+            //  product.Parrafos = parrafos;
+            return parrafos.ToString();
         }
         //Despues de abrir
         public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
-            throw new NotImplementedException();
+            JArray o = JArray.Parse(textoArchivo);
+            Console.WriteLine(o.ToString());
+            return texto;
+            //throw new NotImplementedException();
         }
     }
 }
