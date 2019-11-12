@@ -23,6 +23,21 @@ namespace EditorTexto.Model
         public void setText(String text) {
             this.rich.Text = text;
         }
+        public Memento saveStateToMemento()
+        {
+            return new Memento(rich);
+        }
+        
+        public void getStateFromMemento(Memento memento)
+        {
+            rich = memento.getState();
+        }
+        public void copy() {
+            this.rich.Copy();
+        }
+        public void paste() {
+            this.rich.Paste();
+        }
 
     }
 }

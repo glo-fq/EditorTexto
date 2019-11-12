@@ -97,15 +97,15 @@ namespace EditorTexto.Model
             var pieces = textoArchivo.Split(new[] { "</colores>" }, StringSplitOptions.None);
 
             //string colores = pieces[0];
-            string texto = pieces[1];
+            string text = pieces[1];
 
             //Quita los tags de colores
             //colores.Remove(0, 8);
             //colores.Substring(colores.Length - 9);
 
             //Quita los tags de texto
-            texto = texto.Remove(0, 9);
-            texto = texto.Substring(0, texto.Length - 11);
+            text = text.Remove(0, 9);
+            text = text.Substring(0, text.Length - 11);
 
             return texto;
 

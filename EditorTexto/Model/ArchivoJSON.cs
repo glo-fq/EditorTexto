@@ -41,8 +41,20 @@ namespace EditorTexto.Model
         //Despues de abrir
         public override Texto convertirATexto(string textoArchivo, Texto texto)
         {
-            JArray o = JArray.Parse(textoArchivo);
-            Console.WriteLine(o.ToString());
+            JArray json = JArray.Parse(textoArchivo);
+            int cont = 0;
+            foreach (JArray parrafo in json) {
+                foreach (JObject item in parrafo) {
+                    string letra = item.GetValue("Letra").ToString();
+                    string estilo = item.GetValue("Estilo").ToString();
+                    texto.getRich().AppendText(letra);
+                    texto.getRich().Select(cont, 1);
+                    Color color = Color.FromName(estilo);
+                    texto.getRich().SelectionColor = color;
+                    cont++;
+                }
+            }
+         //   Console.WriteLine(o.ToString());
             return texto;
             //throw new NotImplementedException();
         }

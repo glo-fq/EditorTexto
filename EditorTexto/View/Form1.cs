@@ -18,7 +18,8 @@ namespace EditorTexto
         Texto texto;
         Archivo archivo=null;
         String ruta;
-
+        Caretaker caretaker;
+        int contador = 0;
         public Form1()
         {
             InitializeComponent();
@@ -47,8 +48,7 @@ namespace EditorTexto
                 this.ruta = Open.FileName;
                 this.archivo = factory.CrearArchivo(extension);
                 String text = this.archivo.abriArchivo(Open.FileName);
-                this.texto= this.archivo.convertirATexto(text, texto);
-                richTextBox1.Text= this.texto.getText();
+                this.archivo.convertirATexto(text, texto);
             }
             catch (Exception) {
             }
@@ -106,22 +106,32 @@ namespace EditorTexto
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Copy();
+            texto.copy();
         }
 
         private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Paste();
+            texto.paste();
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Undo();
+            caretaker.add(texto.saveStateToMemento());
+            contador = caretaker.size() - 1;
+            if (contador < caretaker.size() && contador>=0) {
+                texto.getStateFromMemento(caretaker.get(contador-1));
+                contador = contador - 1;
+            }   
+           // richTextBox1.Undo();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Redo();
+            if (contador < caretaker.size() - 1) {
+                texto.getStateFromMemento(caretaker.get(contador + 1));
+                contador = contador + 1;
+            }
+            //richTextBox1.Redo();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -136,6 +146,7 @@ namespace EditorTexto
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            caretaker = new Caretaker();
             factory = new Factory();
             texto = new Texto();
             texto.setRich(this.richTextBox1);
@@ -185,6 +196,12 @@ namespace EditorTexto
 
             }
             catch (Exception) { }
+        }
+
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Si estoy guardando algo");
+            
         }
     }
 }
