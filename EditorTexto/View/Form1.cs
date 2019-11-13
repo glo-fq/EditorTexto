@@ -1,4 +1,5 @@
-﻿using EditorTexto.Model;
+﻿
+using EditorTexto.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,9 +20,10 @@ namespace EditorTexto
         Archivo archivo=null;
         String ruta;
         Caretaker caretaker;
-        int contador = 0;
+        int contador = -1;
+
         public Form1()
-        {
+        {          
             InitializeComponent();
         }
 
@@ -116,21 +118,20 @@ namespace EditorTexto
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-      /*      caretaker.add(texto.saveStateToMemento());
-            contador = caretaker.size() - 1;
-            if (contador < caretaker.size() && contador>=0) {
-                texto.getStateFromMemento(caretaker.get(contador-1));
-                contador = contador - 1;
-            }   ]*/
+            if (caretaker.indiceMementoActual()>0) {
+                Console.WriteLine("si???");
+                texto.getStateFromMemento(caretaker.undo());
+                
+            }
+
            // richTextBox1.Undo();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-       /*     if (contador < caretaker.size() - 1) {
-                texto.getStateFromMemento(caretaker.get(contador + 1));
-                contador = contador + 1;
-            }*/
+            if (caretaker.indiceMementoActual() < caretaker.size()-1) {
+                texto.getStateFromMemento(caretaker.redo());
+            }
             //richTextBox1.Redo();
         }
 
@@ -146,7 +147,7 @@ namespace EditorTexto
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //caretaker = new Caretaker();
+            caretaker = new Caretaker();
             factory = new Factory();
             texto = new Texto();
             texto.setRich(this.richTextBox1);
@@ -200,8 +201,17 @@ namespace EditorTexto
 
         private void RichTextBox1_TextChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Si estoy guardando algo");
-            
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                Console.WriteLine("si entra");
+                caretaker.add(texto.saveStateToMemento());
+                //caretaker.MementoActual();
+                contador++;               
+            }
         }
     }
 }

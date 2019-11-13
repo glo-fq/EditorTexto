@@ -49,10 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Memento\CompoundMemento.cs" />
-    <Compile Include="Memento\IMemento.cs" />
-    <Compile Include="Memento\RoundStack.cs" />
-    <Compile Include="Memento\UndoRedoHistory.cs" />
     <Compile Include="Model\Archivo.cs" />
     <Compile Include="Model\ArchivoCSV.cs" />
     <Compile Include="Model\ArchivoJSON.cs" />
@@ -64,6 +60,7 @@
     <Compile Include="Model\Factory.cs" />
     <Compile Include="Model\IFactory.cs" />
     <Compile Include="Model\Memento.cs" />
+    <Compile Include="Model\Program.cs" />
     <Compile Include="Model\Texto.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
