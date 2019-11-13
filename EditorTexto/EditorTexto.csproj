@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Class1.cs" />
     <Compile Include="Model\Archivo.cs" />
     <Compile Include="Model\ArchivoCSV.cs" />
     <Compile Include="Model\ArchivoJSON.cs" />
@@ -57,8 +56,11 @@
     <Compile Include="Model\ArchivoTXTConTabuladores.cs" />
     <Compile Include="Model\ArchivoTXTSinTabuladores.cs" />
     <Compile Include="Model\ArchivoXML.cs" />
+    <Compile Include="Model\Caretaker.cs" />
     <Compile Include="Model\Factory.cs" />
     <Compile Include="Model\IFactory.cs" />
+    <Compile Include="Model\Memento.cs" />
+    <Compile Include="Model\Program.cs" />
     <Compile Include="Model\Texto.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
@@ -66,7 +68,6 @@
     <Compile Include="View\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controller\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
