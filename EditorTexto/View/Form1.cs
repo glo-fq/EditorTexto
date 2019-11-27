@@ -1,4 +1,5 @@
-﻿using EditorTexto.Model;
+﻿
+using EditorTexto.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +19,11 @@ namespace EditorTexto
         Texto texto;
         Archivo archivo=null;
         String ruta;
+        Caretaker caretaker;
+        int contador = -1;
 
         public Form1()
-        {
+        {          
             InitializeComponent();
         }
 
@@ -47,8 +50,7 @@ namespace EditorTexto
                 this.ruta = Open.FileName;
                 this.archivo = factory.CrearArchivo(extension);
                 String text = this.archivo.abriArchivo(Open.FileName);
-                this.texto= this.archivo.convertirATexto(text, texto);
-                richTextBox1.Text= this.texto.getText();
+                this.archivo.convertirATexto(text, texto);
             }
             catch (Exception) {
             }
@@ -106,22 +108,31 @@ namespace EditorTexto
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Copy();
+            texto.copy();
         }
 
         private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Paste();
+            texto.paste();
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Undo();
+            if (caretaker.indiceMementoActual()>0) {
+                Console.WriteLine("si???");
+                texto.getStateFromMemento(caretaker.undo());
+                
+            }
+
+           // richTextBox1.Undo();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Redo();
+            if (caretaker.indiceMementoActual() < caretaker.size()-1) {
+                texto.getStateFromMemento(caretaker.redo());
+            }
+            //richTextBox1.Redo();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -136,6 +147,7 @@ namespace EditorTexto
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            caretaker = new Caretaker();
             factory = new Factory();
             texto = new Texto();
             texto.setRich(this.richTextBox1);
@@ -185,6 +197,21 @@ namespace EditorTexto
 
             }
             catch (Exception) { }
+        }
+
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                Console.WriteLine("si entra");
+                caretaker.add(texto.saveStateToMemento());
+                //caretaker.MementoActual();
+                contador++;               
+            }
         }
     }
 }
