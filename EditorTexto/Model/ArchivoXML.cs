@@ -20,7 +20,6 @@ namespace EditorTexto.Model
             string strFinal = "<colores>\n";
 
             string colorAnterior = "";
-            //int colorAnterior = 0;
 
             for (int i = 0; i < texto.getText().Length; i++) {
                 rtb.Select(i, 1);
@@ -29,7 +28,6 @@ namespace EditorTexto.Model
 
 
                 string color = getNombreColor(rtb.SelectionColor);
-                //int color = rtb.SelectionColor.ToArgb();
                 //Console.WriteLine(i + ". Color: " + rtb.SelectionColor.ToArgb().ToString());
 
 
@@ -81,12 +79,35 @@ namespace EditorTexto.Model
             return name;
         }
 
-        public RichTextBox agregarColores(Texto texto) {
+        public Texto agregarColores(Texto texto, string tagColores) {
+            //Extraer colores
 
-            RichTextBox rtf = texto.getRich();
+            //Extraer nombres
+            List<string> arrColores = new List<string>();
+            string tempColor = "";
+            int indexOf = -1;
 
-            var pieces = texto.getText().Split(new[] { "</colores>" }, StringSplitOptions.None);
-            string colores = pieces[0];
+            while (tagColores.Contains('>')) {
+
+                //Quitar el primer '<'
+                tagColores = tagColores.Remove(0, 1);
+                indexOf = tagColores.IndexOf('>');
+                //Seleccionar el texto antes del primer '>'
+                tempColor = tagColores.Substring(0, indexOf);
+                Console.WriteLine(tempColor);
+                arrColores.Add(tempColor);
+
+                //Quitar el color del string original
+                tagColores = tagColores.Remove(0, indexOf);
+
+            }
+
+            //Extraer indices
+
+            RichTextBox rtb = texto.getRich();
+            rtb.HideSelection = true;
+
+
 
             throw new NotImplementedException();
         }
@@ -96,16 +117,20 @@ namespace EditorTexto.Model
         {
             var pieces = textoArchivo.Split(new[] { "</colores>" }, StringSplitOptions.None);
 
-            //string colores = pieces[0];
-            string texto = pieces[1];
+            string colores = pieces[0];
+            string text = pieces[1];
 
-            //Quita los tags de colores
-            //colores.Remove(0, 8);
-            //colores.Substring(colores.Length - 9);
+            //Quita el tag de colores que queda
+            colores = colores.Remove(0, 10);
+            Console.WriteLine(colores);
 
             //Quita los tags de texto
-            texto = texto.Remove(0, 9);
-            texto = texto.Substring(0, texto.Length - 11);
+            text = text.Remove(0, 9);
+            text = text.Substring(0, text.Length - 11);
+
+            texto.setText(text);
+
+            //texto = agregarColores(texto, colores);
 
             return texto;
 
