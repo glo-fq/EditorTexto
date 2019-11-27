@@ -61,10 +61,6 @@ namespace EditorTexto.Model
             string name = "Unknown";
             foreach (KnownColor kc in Enum.GetValues(typeof(KnownColor)))
             {
-                int azul = Color.Blue.ToArgb();
-                //Console.WriteLine(azul.ToString());
-                int rojo = Color.Red.ToArgb();
-                int verde = Color.Green.ToArgb();
 
                 Color known = Color.FromKnownColor(kc);
                 //Console.WriteLine(known.Name);
@@ -81,35 +77,80 @@ namespace EditorTexto.Model
 
         public Texto agregarColores(Texto texto, string tagColores) {
             //Extraer colores
+            
 
             //Extraer nombres
-            List<string> arrColores = new List<string>();
+            List<string> arrStrColores = new List<string>();
+            List<int> arrIndices = new List<int>();
+            List<Color> arrColores = new List<Color>();
             string tempColor = "";
             int indexOf = -1;
+            int otherIndexOf = -1;
+            int tempIndice = -1;
+            
 
-            while (tagColores.Contains('>')) {
+            while (tagColores.Contains('<')) {
 
                 //Quitar el primer '<'
                 tagColores = tagColores.Remove(0, 1);
                 indexOf = tagColores.IndexOf('>');
                 //Seleccionar el texto antes del primer '>'
                 tempColor = tagColores.Substring(0, indexOf);
-                Console.WriteLine(tempColor);
-                arrColores.Add(tempColor);
+                //Console.WriteLine("Color: " + tempColor);
+                arrStrColores.Add(tempColor);
 
                 //Quitar el color del string original
-                tagColores = tagColores.Remove(0, indexOf);
+                tagColores = tagColores.Remove(0, indexOf+1);
+
+                //Busca el siguiente '<' y el siguiente '>'
+                indexOf = tagColores.IndexOf('>');
+                otherIndexOf = tagColores.IndexOf('<');
+
+                //Console.WriteLine("Indice: " + tagColores.Substring(0, otherIndexOf));
+                tempIndice =  Convert.ToInt32(tagColores.Substring(0, otherIndexOf));
+                arrIndices.Add(tempIndice);
+
+                //Quita el indice y el closing tag del string original
+                try
+                {
+                    tagColores = tagColores.Remove(0, indexOf + 2);
+                }
+                catch (Exception e) {
+                    tagColores = "";
+                }
 
             }
 
-            //Extraer indices
+            //Convertir el arreglo de strings de colores a arreglo de Color
+            foreach (string strColor in arrStrColores) {
+                Color clr = Color.FromName(strColor);
+                //Console.WriteLine("Color clr name: " + clr.Name);
+                arrColores.Add(clr);
+            }
+
 
             RichTextBox rtb = texto.getRich();
             rtb.HideSelection = true;
 
+            int textLength = rtb.TextLength;
+            //Recorrer los colores para irlos agregando al texto
+            for (int i = 0; i < arrColores.Count; i++) {
+                if (i == (arrColores.Count - 1)){
+                    rtb.Select(arrIndices.ElementAt(i), (textLength - 1) - arrIndices.ElementAt(i)+1);
+                } else {
+                    rtb.Select(arrIndices.ElementAt(i), (arrIndices.ElementAt(i + 1) - 1) - arrIndices.ElementAt(i)+1);
+                }
+                rtb.SelectionColor = arrColores.ElementAt(i);
+            }
 
+            rtb.DeselectAll();
 
-            throw new NotImplementedException();
+            rtb.HideSelection = false;
+
+            texto.setRich(rtb);
+
+            return texto;
+            //throw new NotImplementedException();
         }
 
         //Despues de abrir
@@ -129,6 +170,8 @@ namespace EditorTexto.Model
             text = text.Substring(0, text.Length - 11);
 
             texto.setText(text);
+
+            texto = agregarColores(texto, colores);
 
             //texto = agregarColores(texto, colores);
 

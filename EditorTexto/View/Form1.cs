@@ -1,5 +1,7 @@
 ﻿
 using EditorTexto.Model;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -189,10 +191,47 @@ namespace EditorTexto
                     extension = extension + "c";
                 }
                 this.ruta = Save.FileName;
-                archivo = factory.CrearArchivo(extension);
-                String text = (String)archivo.convertirAFormatoDeseado(this.texto);
-                archivo.setTexto(text);
-                archivo.guardarComo(Save.FileName);
+
+                if (!(extension == ".pdf"))
+                {
+                    archivo = factory.CrearArchivo(extension);
+                    String text = (String)archivo.convertirAFormatoDeseado(this.texto);
+                    archivo.setTexto(text);
+                    archivo.guardarComo(Save.FileName);
+                }
+                else {
+                    RichTextBox rtb = this.texto.getRich();
+
+                    iTextSharp.text.Document myDocument = new iTextSharp.text.Document(PageSize.A4.Rotate());
+
+                    try
+                    {
+                        // step 2:
+                        // Now create a writer that listens to this doucment and writes the document to desired Stream.
+
+                        PdfWriter.GetInstance(myDocument, new FileStream(Save.FileName, FileMode.Create));
+
+                        // step 3:  Open the document now using
+                        myDocument.Open();
+
+                        // step 4: Now add some contents to the document
+                        myDocument.Add(new iTextSharp.text.Paragraph(rtb.Text));
+                    }
+                    catch (DocumentException de)
+                    {
+                        Console.Error.WriteLine(de.Message);
+                    }
+                    catch (IOException ioe)
+                    {
+                        Console.Error.WriteLine(ioe.Message);
+                    }
+                    // step 5: Remember to close the documnet
+                    myDocument.Close();
+
+
+
+                }
+                
               
 
             }
